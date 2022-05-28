@@ -45,13 +45,13 @@ tf_upgrade_v2 \
 ##### 创建并激活一个python3.6的环境snowflake
     conda create --name snowflake biopython
 ##### 激活环境
-    source activate snowflakes
+    conda activate snowflakes
 ##### 列出所有环境
     conda info -e
 ##### 切换到另一个环境
-    source activate snowflakes
+    conda activate snowflakes
 ##### 从你当前工作环境的路径切换到系统根目录
-    source deactivate
+    conda deactivate
 ##### 通过克隆snowfllakes来创建一个称为flowers的副本
     conda create -n flowers --clone snowflakes
 ##### 删除一个环境
