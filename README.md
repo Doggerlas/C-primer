@@ -94,6 +94,9 @@ tf_upgrade_v2 \
 	jupyter notebook  --allow-root
 	
 ## 4.[anaconda3安装TensorFlow2.6.0-gpu](https://blog.csdn.net/a745233700/article/details/109377039)
+### 为什么不能按论文配置成tf1.3.0 python3.6？
+   想在docker里用GPU就得使用nvidia-docker，这个之前已经被安装在宿主机了。所以我创造了一个名为first_container的nvidia-docker容器，这个容器的nvidia-smi与宿主机的一致，cuda版本也是与宿主机相同的11.4，当然显卡和cudnn也是一样的，属于是宿主机的映射。
+   因为CUDA版本11.4与TensorFlow版本对应，已经不支持1.3了。如果在first_container里硬安装符合1.3.0的CUDA和cudnn版本，造成CUDA与显卡不匹配肯定会出问题。所以我参考宿主机的python版本与TensorFlow版本，打算在first_container里也打算安装相同的TensorFlow2.6.0与python3.8.8。我用anaconda创建了python3.8.8版本的环境tensorflow2.6.0_gpu并在里面安装了tensorflow2.6.0和11.3的cudatoolkit及8.2.1的cudnn，成功支持了GPU选项。
 ##### 参考宿主机支持GPU和conda 升级conda后再进行布置tf2.6.0环境
 	conda update conda		#升级到最新版4.13.0
 ##### 创建环境
