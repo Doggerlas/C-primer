@@ -107,9 +107,11 @@ tf_upgrade_v2 \
 	pip install tensorflow-gpu==2.6.0 -i https://pypi.tuna.tsinghua.edu.cn/simple   
 ###### 降级protobuf，避免出现问题：TypeError: Descriptors cannot not be created directly
 	pip install protobuf==3.20.1
+![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220528221544.png)
 ##### 安装cudatoolkit和cudnn 避免出现链接库.so找不到的问题
 	conda install cudatoolkit=11 
 	conda install cudnn
+![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220528221305.png)
 ##### 以下在python3打开
 		import tensorflow as tf
 		tf.test.is_built_with_cuda()	#检查tensorflow是否得到CUDA支持，安装成功则显示true，否则为false
