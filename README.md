@@ -29,7 +29,7 @@ tf_upgrade_v2 \
 ##### 退出容器    
     exit                               
 ##### 显示完全id：482ee69cb4415710228d1e64fdf10fb572a86b4fcbdf9924868746457c2b4c6b
-	  docker inspect --format="{{.Id}}"  first_container      
+    docker inspect --format="{{.Id}}"  first_container      
 ##### 主机到docker文件传输
     docker cp /home/user1/Wlm/Anaconda3-5.3.0-Linux-x86_64.sh 482ee69cb4415710228d1e64fdf10fb572a86b4fcbdf9924868746457c2b4c6b:/home   
 ##### docker到主机文件传输
@@ -37,7 +37,7 @@ tf_upgrade_v2 \
 ##### 我的docker信息
     CONTAINER ID   IMAGE                   COMMAND       CREATED        STATUS                         PORTS     NAMES
     482ee69cb441   nvidia/cuda:11.0-base   "/bin/bash"   2 hours ago    Up About an hour                         first_container
-# conda相关指令
+# [conda相关指令](https://blog.csdn.net/fyuanfena/article/details/52080270)
 ##### 检查conda版本:
     conda --version
 ##### 升级当前版本的conda
@@ -81,8 +81,8 @@ tf_upgrade_v2 \
 	apt-get install vim
 	
 	
-## 3.安装Anaconda
-##### 下载版本 
+## 3.[安装Anaconda](https://blog.csdn.net/LZW15082682930/article/details/116062237)
+##### [下载版本](https://blog.csdn.net/weixin_39929687/article/details/111023432)
 	Anaconda3-5.3.0-Linux-x86_64.sh	636.9M	2018-09-27 16:01:35	4321e9389b648b5a02824d4473cfdbf	
 ##### 安装
 	bash Anaconda3-5.3.0-Linux-x86_64.sh 安装位置/root/anaconda3
@@ -93,9 +93,9 @@ tf_upgrade_v2 \
 ##### 打开jupyter(暂时用不到)
 	jupyter notebook  --allow-root
 	
-## 4.anaconda3安装TensorFlow2.6.0gpu
-##### 知道上述方法不行，看了主机支持GPU和conda 我想升级conda后再进行布置tf2.6.0环境
-	conda update conda									#升级到最新版4.13.0
+## 4.[anaconda3安装TensorFlow2.6.0-gpu](https://blog.csdn.net/a745233700/article/details/109377039)
+##### 参考宿主机支持GPU和conda 升级conda后再进行布置tf2.6.0环境
+	conda update conda		#升级到最新版4.13.0
 ##### 创建环境
 	conda create -n tensorfolw2.6.0_gpu python=3.8.8
 	conda info -e
@@ -113,7 +113,7 @@ tf_upgrade_v2 \
 ##### 以下在python3打开
 		import tensorflow as tf
 		tf.test.is_built_with_cuda()	#检查tensorflow是否得到CUDA支持，安装成功则显示true，否则为false
-		tf.test.is_gpu_available()		#检查tensorflow是否可以获取到GPU，安装成功则显示true，否则为false
+		tf.test.is_gpu_available()	#检查tensorflow是否可以获取到GPU，安装成功则显示true，否则为false
 	
 ###### 卸载指令(不是版本问题不要卸载)
 	pip uninstall tensorflow tensorflow-gpu
