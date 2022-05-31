@@ -108,13 +108,16 @@ tf_upgrade_v2 \
 	python -V
 ##### 安装tensorfolw2.6.0_gpu
 	pip install tensorflow-gpu==2.6.0 -i https://pypi.tuna.tsinghua.edu.cn/simple   
-###### 降级protobuf，避免出现问题：TypeError: Descriptors cannot not be created directly
-	pip install protobuf==3.20.1
+###### 出现问题1:TypeError: Descriptors cannot not be created directly
 ![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220528221544.png)
-##### 安装cudatoolkit和cudnn 避免出现链接库.so找不到的问题
+###### [解决方案:手动降低 protobuf 为 3.x](https://github.com/PaddlePaddle/PaddleSpeech/issues/1970)
+	pip install protobuf==3.20.1
+##### 出现问题2：安装cudatoolkit和cudnn 避免出现链接库.so找不到的问题
+![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220528221305.png)
+###### 解决方案:安装cudatoolkit与cudnn
 	conda install cudatoolkit=11 
 	conda install cudnn
-![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220528221305.png)
+
 ##### 以下在python3打开
 		import tensorflow as tf
 		tf.test.is_built_with_cuda()	#检查tensorflow是否得到CUDA支持，安装成功则显示true，否则为false
@@ -122,6 +125,50 @@ tf_upgrade_v2 \
 	
 ###### 卸载指令(不是版本问题不要卸载)
 	pip uninstall tensorflow tensorflow-gpu
+
+# 20220531 在482ee69cb441容器中
+## 1.安装Zlib
+	apt-get update
+	apt-get install zlib1g-dev
+![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/zlib.png)
+## 2.安装opencv-python
+	pip install opencv-python
+![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/opencv-python.png)
+######  出现问题3：python3执行import cv2出现:ImportError: libGL.so.1: cannot open shared object file: No such file or directory
+######  [解决方案](https://blog.csdn.net/iLOVEJohnny/article/details/121077928)
+	apt-get update
+	apt install libgl1-mesa-glx
+## 3.[安装opencv](https://blog.csdn.net/qq_38660394/article/details/80581383)
+######  原代码库安装方式 apt-get install libopencv-dev已经不能使用，因为那种方式支持的是cv2.0版本。现在手动安装opencv3.2.0版本
+######  安装依赖
+	apt-get update  
+	apt-get install build-essential
+	apt-get install cmake
+	apt-get install git 
+	apt-get install pkg-config
+	apt-get install libgtk2.0-dev
+	apt-get install libavcodec-dev libavformat-dev libswscale-dev
+######  出现问题4：获取资源报错
+![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220531124312.png)
+######  解决方案：尝试了很多安装源，修改/etc/apt/source.list文件，但是都不行，还会出现umet依赖问题。困扰了30号一天未解决。31号重新执行apt-get install libavcodec-dev libavformat-dev libswscale-dev成功，推测是动态ip问题。
+![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_202205311.png)
+######  下载压缩包
+	wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.2.0.zip 
+	unzip opencv.zip  
+######  编译
+	cd opencv-3.2.0 
+    	mkdir build  
+    	cd build  
+    	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..  
+    	make -j8
+######  出现问题5:编译报错
+![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/que.png)
+######  [解决方案:版本问题，更改源码](https://blog.csdn.net/goodxin_ie/article/details/82856008)
+	vi /root/opencv-3.2.0/modules/videoio/src/cap_ffmpeg_impl.hpp
+######  增加以下宏，删除build重新编译
+![问题](https://github.com/Doggerlas/C-primer/blob/main/pics/%E5%BE%AE%E4%BF%A1solv.png)
+######  部署
+	make install
 	
 
 
