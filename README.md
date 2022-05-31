@@ -122,7 +122,7 @@ tf_upgrade_v2 \
 		import tensorflow as tf
 		tf.test.is_built_with_cuda()	#检查tensorflow是否得到CUDA支持，安装成功则显示true，否则为false
 		tf.test.is_gpu_available()	#检查tensorflow是否可以获取到GPU，安装成功则显示true，否则为false
-	
+!(结果)[https://github.com/Doggerlas/C-primer/blob/main/pics/1212.png]
 ###### 卸载指令(不是版本问题不要卸载)
 	pip uninstall tensorflow tensorflow-gpu
 
